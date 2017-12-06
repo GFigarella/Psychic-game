@@ -8,8 +8,11 @@ var losses = 0;
 var guessesLeft = 8;
 
 // Randomly pick a letter form the letters array
-var computerGuess = letters[Math.floor(Math.random() * letters.length)];
-console.log("computer guess is " + computerGuess);
+function letterGuess(){
+    var computerGuess = letters[Math.floor(Math.random() * letters.length)];
+    console.log("computer guess is " + computerGuess);
+    return computerGuess;
+}
 
 // A reset function that sets everything to its default state
 function reset(){
@@ -20,12 +23,14 @@ function reset(){
     myGuesses = [];
     document.querySelector("#myGuess").innerHTML = myGuesses;
     // resets the computer guess
+    computerGuess;
     var computerGuess = letters[Math.floor(Math.random() * letters.length)];
     console.log("new computer guess is " + computerGuess);
     var userGuess;
-    return;
+    return computerGuess;
 }
 
+var computerGuess = letterGuess();
 // Main event that happens when a key is pressed by the user
 document.onkeyup = function(event){
     //storing user guess in a variable
@@ -36,7 +41,7 @@ document.onkeyup = function(event){
         wins++; 
         document.querySelector("#wins").innerHTML = wins;
         console.log("my guess is " + userGuess);
-        reset();
+        computerGuess = reset();
     }
 
     else{
@@ -51,7 +56,7 @@ document.onkeyup = function(event){
         else{
             losses++;
             document.querySelector("#losses").innerHTML = losses;
-            reset();
+            computerGuess = reset();
         }
     }
 }
